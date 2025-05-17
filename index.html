@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exonova Booklets - Premium PDF Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #7E22CE;
+            --primary-dark: #6B21A8;
+            --primary-light: #E9D5FF;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --card-bg-light: #FFFFFF;
+            --card-shadow-light: 0 4px 6px rgba(0,0,0,0.05);
+            --border-light: #E5E7EB;
+            
+            /* Dark Mode */
+            --dark-bg: #111827;
+            --dark-card: #1F2937;
+            --dark-text: #F3F4F6;
+            --dark-text-light: #9CA3AF;
+            --dark-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --dark-border: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--card-bg-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dark-mode .navbar {
+            background: var(--dark-card);
+            box-shadow: var(--dark-shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .theme-toggle i {
+            font-size: 1.1rem;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #f9f0ff 0%, #e9d5ff 100%);
+            margin-bottom: 2rem;
+        }
+
+        .dark-mode .hero {
+            background: linear-gradient(135deg, #2E1065 0%, #5B21B6 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .dark-mode .hero p {
+            color: var(--dark-text-light);
+        }
+
+        /* Search bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            padding-left: 3rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-light);
+            font-size: 1rem;
+            background: var(--card-bg-light);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .search-bar {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .dark-mode .search-icon {
+            color: var(--dark-text-light);
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .category-tag {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .dark-mode .category-tag {
+            background: rgba(126, 34, 206, 0.2);
+            color: var(--primary-light);
+        }
+
+        .category-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .category-tag.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Booklets grid */
+        .booklets {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.75rem;
+            padding: 1rem 0 3rem;
+        }
+
+        .booklet-card {
+            background: var(--card-bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow-light);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .dark-mode .booklet-card {
+            background: var(--dark-card);
+            box-shadow: var(--dark-shadow);
+            border-color: var(--dark-border);
+        }
+
+        .booklet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .dark-mode .booklet-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+        }
+
+        /* Booklet cover */
+        .booklet-cover {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booklet-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .booklet-card:hover .booklet-cover img {
+            transform: scale(1.05);
+        }
+
+        .booklet-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .info-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .info-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Booklet info */
+        .booklet-info {
+            padding: 1.5rem;
+        }
+
+        .booklet-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .booklet-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .dark-mode .booklet-desc {
+            color: var(--dark-text-light);
+        }
+
+        .booklet-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-mode .booklet-meta {
+            color: var(--dark-text-light);
+        }
+
+        .booklet-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Booklet actions */
+        .booklet-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .dark-mode .btn-outline {
+            color: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* No results */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .dark-mode .no-results {
+            color: var(--dark-text-light);
+        }
+
+        /* Loading spinner */
+        .loading {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(126, 34, 206, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Modals */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg-light);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode .modal-content {
+            background: var(--dark-card);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dark-mode .modal-header {
+            border-color: var(--dark-border);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .dark-mode .close-btn {
+            color: var(--dark-text-light);
+        }
+
+        .close-btn:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--text-dark);
+        }
+
+        .dark-mode .close-btn:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--dark-text);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* PDF Viewer */
+        .pdf-viewer {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dark-mode .pdf-viewer {
+            border-color: var(--dark-border);
+        }
+
+        .pdf-viewer embed {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Info Modal */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .info-cover {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .info-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        .info-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-mode .info-description {
+            color: var(--dark-text-light);
+        }
+
+        .info-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .dark-mode .meta-item {
+            color: var(--dark-text-light);
+        }
+
+        .meta-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .dark-mode .footer {
+            color: var(--dark-text-light);
+            border-color: var(--dark-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .booklets {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-cover {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .logo span {
+                display: none;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .booklet-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="https://aditya-cmd-max.github.io/exonova-/exonova-logo.png" alt="Exonova Logo">
+            <span>Exonova Booklets</span>
+        </a>
+        <div class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Premium PDF Booklets for Effective Learning</h1>
+            <p>Access high-quality, curated educational resources to enhance your knowledge and skills</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" id="searchInput" placeholder="Search booklets...">
+            </div>
+            
+            <div class="categories" id="categoryFilters">
+                <div class="category-tag active" data-category="all">All</div>
+                <div class="category-tag" data-category="math">Mathematics</div>
+                <div class="category-tag" data-category="science">Science</div>
+                <div class="category-tag" data-category="engineering">Engineering</div>
+                <div class="category-tag" data-category="programming">Programming</div>
+                <div class="category-tag" data-category="business">Business</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="booklets" id="bookletsContainer">
+            <!-- Booklets will be loaded here dynamically -->
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PDF Viewer Modal -->
+    <div class="modal" id="pdfModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="pdfModalTitle">Booklet Title</h3>
+                <button class="close-btn" id="closePdfModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="pdf-viewer">
+                    <embed id="pdfEmbed" src="" type="application/pdf">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="downloadPdfBtn">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="infoModalTitle">Booklet Details</h3>
+                <button class="close-btn" id="closeInfoModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-cover">
+                        <img id="infoCoverImg" src="" alt="Booklet Cover">
+                    </div>
+                    <div class="info-content">
+                        <h3 id="infoTitle">Booklet Title</h3>
+                        <p class="info
