@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium PDF booklets for effective learning across various subjects including Mathematics, Science, Engineering, Programming, and Business.">
     <title>Exonova Booklets - Premium PDF Resources</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <style>
         :root {
             --primary: #7E22CE;
@@ -30,7 +33,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -38,6 +40,7 @@
             background: var(--bg-light);
             color: var(--text-dark);
             min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body.dark-mode {
@@ -48,17 +51,6 @@
         /* Smooth scroll behavior */
         html {
             scroll-behavior: smooth;
-        }
-
-        /* Loading animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         /* Layout */
@@ -79,6 +71,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .dark-mode .navbar {
@@ -98,8 +91,9 @@
 
         .logo img {
             height: 36px;
-            width: auto;
+            width: 36px;
             border-radius: 50%;
+            object-fit: cover;
         }
 
         /* Dark mode toggle */
@@ -109,10 +103,27 @@
             gap: 0.5rem;
             cursor: pointer;
             user-select: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(126, 34, 206, 0.1);
+        }
+
+        .dark-mode .theme-toggle:hover {
+            background-color: rgba(126, 34, 206, 0.2);
         }
 
         .theme-toggle i {
             font-size: 1.1rem;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .dark-mode .theme-toggle i {
+            color: var(--dark-text);
         }
 
         /* Hero section */
@@ -121,6 +132,7 @@
             padding: 5rem 1rem;
             background: linear-gradient(135deg, #f9f0ff 0%, #e9d5ff 100%);
             margin-bottom: 2rem;
+            transition: background 0.3s ease;
         }
 
         .dark-mode .hero {
@@ -131,6 +143,7 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             line-height: 1.2;
+            font-weight: 800;
         }
 
         .hero p {
@@ -138,6 +151,7 @@
             color: var(--text-light);
             max-width: 700px;
             margin: 0 auto 2rem;
+            transition: color 0.3s ease;
         }
 
         .dark-mode .hero p {
@@ -160,6 +174,7 @@
             font-size: 1rem;
             background: var(--card-bg-light);
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
         .dark-mode .search-bar {
@@ -180,6 +195,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-light);
+            transition: color 0.3s ease;
         }
 
         .dark-mode .search-icon {
@@ -204,7 +220,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             border: 1px solid transparent;
         }
 
@@ -239,9 +255,15 @@
             overflow: hidden;
             box-shadow: var(--card-shadow-light);
             transition: all 0.3s ease;
-            animation: fadeIn 0.5s ease forwards;
             opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
             border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         .dark-mode .booklet-card {
@@ -287,6 +309,7 @@
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 500;
+            text-transform: capitalize;
         }
 
         .info-btn {
@@ -303,7 +326,7 @@
             justify-content: center;
             cursor: pointer;
             border: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .info-btn:hover {
@@ -314,6 +337,9 @@
         /* Booklet info */
         .booklet-info {
             padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .booklet-title {
@@ -334,6 +360,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            flex: 1;
         }
 
         .dark-mode .booklet-desc {
@@ -362,6 +389,7 @@
         .booklet-actions {
             display: flex;
             gap: 0.75rem;
+            margin-top: auto;
         }
 
         .btn {
@@ -375,7 +403,7 @@
             font-weight: 500;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             text-decoration: none;
             border: none;
         }
@@ -436,6 +464,10 @@
             animation: spin 1s linear infinite;
         }
 
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Modals */
         .modal {
             position: fixed;
@@ -450,7 +482,7 @@
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             backdrop-filter: blur(5px);
         }
 
@@ -467,7 +499,7 @@
             max-height: 90vh;
             overflow: hidden;
             transform: translateY(20px);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
@@ -511,7 +543,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .dark-mode .close-btn {
@@ -615,6 +647,7 @@
             padding: 2rem;
             color: var(--text-light);
             border-top: 1px solid var(--border-light);
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
 
         .dark-mode .footer {
@@ -667,11 +700,11 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="https://aditya-cmd-max.github.io/exonova-/exonova-logo.png" alt="Exonova Logo">
+        <a href="#" class="logo" aria-label="Exonova Booklets Home">
+            <img src="https://aditya-cmd-max.github.io/exonova-/exonova-logo.png" alt="Exonova Logo" width="36" height="36" loading="lazy">
             <span>Exonova Booklets</span>
         </a>
-        <div class="theme-toggle" id="themeToggle">
+        <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
             <i class="fas fa-moon"></i>
             <i class="fas fa-sun"></i>
         </div>
@@ -684,17 +717,17 @@
             <p>Access high-quality, curated educational resources to enhance your knowledge and skills</p>
             
             <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-bar" id="searchInput" placeholder="Search booklets...">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" class="search-bar" id="searchInput" placeholder="Search booklets..." aria-label="Search booklets">
             </div>
             
-            <div class="categories" id="categoryFilters">
-                <div class="category-tag active" data-category="all">All</div>
-                <div class="category-tag" data-category="math">Mathematics</div>
-                <div class="category-tag" data-category="science">Science</div>
-                <div class="category-tag" data-category="engineering">Engineering</div>
-                <div class="category-tag" data-category="programming">Programming</div>
-                <div class="category-tag" data-category="business">Business</div>
+            <div class="categories" id="categoryFilters" role="tablist">
+                <button class="category-tag active" data-category="all" role="tab" aria-selected="true">All</button>
+                <button class="category-tag" data-category="math" role="tab" aria-selected="false">Mathematics</button>
+                <button class="category-tag" data-category="science" role="tab" aria-selected="false">Science</button>
+                <button class="category-tag" data-category="engineering" role="tab" aria-selected="false">Engineering</button>
+                <button class="category-tag" data-category="programming" role="tab" aria-selected="false">Programming</button>
+                <button class="category-tag" data-category="business" role="tab" aria-selected="false">Business</button>
             </div>
         </div>
     </section>
@@ -704,17 +737,17 @@
         <div class="booklets" id="bookletsContainer">
             <!-- Booklets will be loaded here dynamically -->
             <div class="loading">
-                <div class="spinner"></div>
+                <div class="spinner" aria-label="Loading..."></div>
             </div>
         </div>
     </main>
 
     <!-- PDF Viewer Modal -->
-    <div class="modal" id="pdfModal">
+    <div class="modal" id="pdfModal" aria-hidden="true" aria-labelledby="pdfModalTitle">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="pdfModalTitle">Booklet Title</h3>
-                <button class="close-btn" id="closePdfModal">&times;</button>
+                <button class="close-btn" id="closePdfModal" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="pdf-viewer">
@@ -723,24 +756,482 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-primary" id="downloadPdfBtn">
-                    <i class="fas fa-download"></i> Download PDF
+                    <i class="fas fa-download" aria-hidden="true"></i> Download PDF
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Info Modal -->
-    <div class="modal" id="infoModal">
+    <div class="modal" id="infoModal" aria-hidden="true" aria-labelledby="infoModalTitle">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="infoModalTitle">Booklet Details</h3>
-                <button class="close-btn" id="closeInfoModal">&times;</button>
+                <button class="close-btn" id="closeInfoModal" aria-label="Close modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="info-grid">
                     <div class="info-cover">
-                        <img id="infoCoverImg" src="" alt="Booklet Cover">
+                        <img id="infoCoverImg" src="" alt="Booklet Cover" loading="lazy">
                     </div>
                     <div class="info-content">
                         <h3 id="infoTitle">Booklet Title</h3>
-                        <p class="info
+                        <p class="info-description" id="infoDescription">Loading description...</p>
+                        
+                        <div class="info-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-book-open" aria-hidden="true"></i>
+                                <span id="infoPages">- pages</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                                <span id="infoDate">Added: -</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-tag" aria-hidden="true"></i>
+                                <span id="infoCategory">Category: -</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                                <span id="infoSize">Size: - MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear">2023</span> Exonova Booklets. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced Booklet Data with more realistic examples
+        const booklets = [
+            {
+                id: 1,
+                title: "Advanced Algebra Concepts",
+                description: "Comprehensive guide covering all advanced algebra topics including linear algebra, quadratic equations, polynomials, and more. Includes 150+ practice problems with detailed solutions.",
+                category: "math",
+                thumbnail: "https://m.media-amazon.com/images/I/71iY+TRlURL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/advanced-algebra.pdf",
+                pages: 128,
+                addedDate: "2023-10-15",
+                fileSize: 4.2,
+                author: "Dr. Mathematics"
+            },
+            {
+                id: 2,
+                title: "University Physics Vol. 1",
+                description: "First volume of our physics series covering mechanics, thermodynamics, and waves. Perfect for first-year university students with clear explanations and diagrams.",
+                category: "science",
+                thumbnail: "https://m.media-amazon.com/images/I/61tP7UQ8RBL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/university-physics.pdf",
+                pages: 210,
+                addedDate: "2023-09-20",
+                fileSize: 8.7,
+                author: "Physics Department"
+            },
+            {
+                id: 3,
+                title: "Python Programming Mastery",
+                description: "From beginner to advanced Python programming. Covers syntax, data structures, algorithms, OOP, and popular libraries like NumPy and Pandas. Includes coding exercises.",
+                category: "programming",
+                thumbnail: "https://m.media-amazon.com/images/I/71WkDpNtYlL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/python-mastery.pdf",
+                pages: 320,
+                addedDate: "2023-11-05",
+                fileSize: 12.4,
+                author: "Code Masters"
+            },
+            {
+                id: 4,
+                title: "Mechanical Engineering Principles",
+                description: "Fundamental principles of mechanical engineering including statics, dynamics, materials science, and thermodynamics. Essential for engineering students.",
+                category: "engineering",
+                thumbnail: "https://m.media-amazon.com/images/I/81WQqgR1XBL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/mechanical-engineering.pdf",
+                pages: 275,
+                addedDate: "2023-08-12",
+                fileSize: 10.1,
+                author: "Engineering Press"
+            },
+            {
+                id: 5,
+                title: "Business Analytics Fundamentals",
+                description: "Introduction to business analytics covering data visualization, statistical analysis, and predictive modeling using real-world business scenarios.",
+                category: "business",
+                thumbnail: "https://m.media-amazon.com/images/I/71s3Z6G0K9L._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/business-analytics.pdf",
+                pages: 180,
+                addedDate: "2023-07-22",
+                fileSize: 6.5,
+                author: "Business Insights"
+            },
+            {
+                id: 6,
+                title: "Organic Chemistry Reactions",
+                description: "Complete guide to organic chemistry reactions with mechanisms, examples, and practice problems. Perfect for chemistry students and researchers.",
+                category: "science",
+                thumbnail: "https://m.media-amazon.com/images/I/81p-HfQYkQL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/organic-chemistry.pdf",
+                pages: 195,
+                addedDate: "2023-12-01",
+                fileSize: 7.8,
+                author: "Chemistry Experts"
+            },
+            {
+                id: 7,
+                title: "Data Structures & Algorithms",
+                description: "Comprehensive reference for common data structures and algorithms with implementations in multiple programming languages.",
+                category: "programming",
+                thumbnail: "https://m.media-amazon.com/images/I/61MQxZDfNLL._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/dsa-guide.pdf",
+                pages: 240,
+                addedDate: "2023-11-18",
+                fileSize: 9.3,
+                author: "Algorithm Experts"
+            },
+            {
+                id: 8,
+                title: "Financial Accounting Principles",
+                description: "Fundamentals of financial accounting with real-world case studies and practice problems for business students.",
+                category: "business",
+                thumbnail: "https://m.media-amazon.com/images/I/81xQ5+5tY+L._AC_UF1000,1000_QL80_.jpg",
+                pdfUrl: "https://example.com/booklets/financial-accounting.pdf",
+                pages: 165,
+                addedDate: "2023-10-30",
+                fileSize: 5.9,
+                author: "Finance Academy"
+            }
+        ];
+
+        // DOM Elements
+        const bookletsContainer = document.getElementById('bookletsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilters = document.getElementById('categoryFilters');
+        const themeToggle = document.getElementById('themeToggle');
+        const currentYearElement = document.getElementById('currentYear');
+        
+        // Modal elements
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfModalTitle = document.getElementById('pdfModalTitle');
+        const pdfEmbed = document.getElementById('pdfEmbed');
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        const closePdfModal = document.getElementById('closePdfModal');
+        
+        const infoModal = document.getElementById('infoModal');
+        const infoModalTitle = document.getElementById('infoModalTitle');
+        const infoCoverImg = document.getElementById('infoCoverImg');
+        const infoTitle = document.getElementById('infoTitle');
+        const infoDescription = document.getElementById('infoDescription');
+        const infoPages = document.getElementById('infoPages');
+        const infoDate = document.getElementById('infoDate');
+        const infoCategory = document.getElementById('infoCategory');
+        const infoSize = document.getElementById('infoSize');
+        const closeInfoModal = document.getElementById('closeInfoModal');
+
+        // App State
+        const state = {
+            currentCategory: 'all',
+            currentSearch: '',
+            filteredBooklets: [],
+            activeModal: null
+        };
+
+        // Initialize the app
+        function init() {
+            // Set current year in footer
+            currentYearElement.textContent = new Date().getFullYear();
+            
+            // Load booklets after a small delay to show loading spinner
+            setTimeout(() => {
+                state.filteredBooklets = [...booklets];
+                renderBooklets();
+            }, 800);
+            
+            setupEventListeners();
+            checkDarkModePreference();
+        }
+
+        // Render booklets based on current filters
+        function renderBooklets() {
+            if (!bookletsContainer) return;
+            
+            bookletsContainer.innerHTML = '';
+            
+            if (state.filteredBooklets.length === 0) {
+                bookletsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-book-open" style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true"></i>
+                        <h3>No booklets found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const fragment = document.createDocumentFragment();
+            
+            state.filteredBooklets.forEach((booklet, index) => {
+                const bookletCard = document.createElement('article');
+                bookletCard.className = 'booklet-card';
+                bookletCard.style.animationDelay = `${index * 0.1}s`;
+                bookletCard.setAttribute('aria-labelledby', `booklet-title-${booklet.id}`);
+                bookletCard.innerHTML = `
+                    <div class="booklet-cover">
+                        <img src="${booklet.thumbnail}" alt="${booklet.title}" loading="lazy">
+                        <span class="booklet-badge">${booklet.category}</span>
+                        <button class="info-btn" data-id="${booklet.id}" aria-label="More info about ${booklet.title}">
+                            <i class="fas fa-info" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="booklet-info">
+                        <h3 class="booklet-title" id="booklet-title-${booklet.id}">${booklet.title}</h3>
+                        <p class="booklet-desc">${booklet.description}</p>
+                        <div class="booklet-meta">
+                            <span><i class="fas fa-book-open" aria-hidden="true"></i> ${booklet.pages} pages</span>
+                            <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> ${formatDate(booklet.addedDate)}</span>
+                        </div>
+                        <div class="booklet-actions">
+                            <button class="btn btn-primary" data-pdf="${booklet.pdfUrl}" data-title="${booklet.title}" aria-label="View ${booklet.title}">
+                                <i class="fas fa-eye" aria-hidden="true"></i> View
+                            </button>
+                            <a href="${booklet.pdfUrl}" class="btn btn-outline" download="${booklet.title.replace(/\s+/g, '-').toLowerCase()}.pdf" aria-label="Download ${booklet.title}">
+                                <i class="fas fa-download" aria-hidden="true"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                `;
+                fragment.appendChild(bookletCard);
+            });
+            
+            bookletsContainer.appendChild(fragment);
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown date';
+            
+            try {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('en-US', options);
+            } catch (e) {
+                console.error('Error formatting date:', e);
+                return dateString;
+            }
+        }
+
+        // Filter booklets based on search and category
+        function filterBooklets() {
+            state.filteredBooklets = booklets.filter(booklet => {
+                const matchesCategory = state.currentCategory === 'all' || booklet.category === state.currentCategory;
+                const matchesSearch = state.currentSearch === '' || 
+                    booklet.title.toLowerCase().includes(state.currentSearch.toLowerCase()) || 
+                    booklet.description.toLowerCase().includes(state.currentSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+            
+            renderBooklets();
+        }
+
+        // Show PDF modal
+        function showPdfModal(pdfUrl, title) {
+            if (!pdfUrl || !title) return;
+            
+            pdfModalTitle.textContent = title;
+            pdfEmbed.src = pdfUrl;
+            downloadPdfBtn.href = pdfUrl;
+            downloadPdfBtn.download = title.replace(/\s+/g, '-').toLowerCase() + '.pdf';
+            
+            state.activeModal = 'pdf';
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.body.setAttribute('aria-hidden', 'true');
+        }
+
+        // Show info modal
+        function showInfoModal(bookletId) {
+            const booklet = booklets.find(b => b.id === bookletId);
+            if (!booklet) return;
+            
+            infoModalTitle.textContent = booklet.title;
+            infoCoverImg.src = booklet.thumbnail;
+            infoTitle.textContent = booklet.title;
+            infoDescription.textContent = booklet;
+                      infoPages.textContent = `${booklet.pages} pages`;
+            infoDate.textContent = `Added: ${formatDate(booklet.addedDate)}`;
+            infoCategory.textContent = `Category: ${booklet.category.charAt(0).toUpperCase() + booklet.category.slice(1)}`;
+            infoSize.textContent = `Size: ${booklet.fileSize} MB`;
+            
+            state.activeModal = 'info';
+            infoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.body.setAttribute('aria-hidden', 'true');
+        }
+
+        // Close all modals
+        function closeModals() {
+            if (state.activeModal === 'pdf') {
+                pdfModal.classList.remove('active');
+                pdfEmbed.src = '';
+            } else if (state.activeModal === 'info') {
+                infoModal.classList.remove('active');
+            }
+            
+            state.activeModal = null;
+            document.body.style.overflow = 'auto';
+            document.body.removeAttribute('aria-hidden');
+        }
+
+        // Check user's dark mode preference
+        function checkDarkModePreference() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedMode = localStorage.getItem('darkMode');
+            
+            if (savedMode === 'dark' || (prefersDark && savedMode !== 'light')) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        // Toggle dark/light mode
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
+            
+            // Announce mode change for screen readers
+            const mode = isDark ? 'dark' : 'light';
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = `Switched to ${mode} mode`;
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
+        }
+
+        // Debounce function for performance optimization
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input with debounce
+            searchInput.addEventListener('input', debounce((e) => {
+                state.currentSearch = e.target.value.trim();
+                filterBooklets();
+            }, 300));
+            
+            // Category filters
+            categoryFilters.addEventListener('click', (e) => {
+                const categoryTag = e.target.closest('.category-tag');
+                if (!categoryTag) return;
+                
+                const currentActive = document.querySelector('.category-tag.active');
+                if (currentActive) currentActive.classList.remove('active');
+                
+                categoryTag.classList.add('active');
+                state.currentCategory = categoryTag.dataset.category;
+                filterBooklets();
+                
+                // Update ARIA attributes
+                document.querySelectorAll('.category-tag').forEach(tag => {
+                    tag.setAttribute('aria-selected', tag === categoryTag ? 'true' : 'false');
+                });
+            });
+            
+            // View PDF buttons (delegated)
+            bookletsContainer.addEventListener('click', (e) => {
+                const primaryBtn = e.target.closest('.btn-primary');
+                if (primaryBtn && primaryBtn.dataset.pdf) {
+                    showPdfModal(primaryBtn.dataset.pdf, primaryBtn.dataset.title);
+                    return;
+                }
+                
+                // Info buttons
+                const infoBtn = e.target.closest('.info-btn');
+                if (infoBtn) {
+                    showInfoModal(parseInt(infoBtn.dataset.id));
+                }
+            });
+            
+            // Close modals
+            closePdfModal.addEventListener('click', closeModals);
+            closeInfoModal.addEventListener('click', closeModals);
+            
+            // Close modals when clicking outside
+            [pdfModal, infoModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModals();
+                    }
+                });
+            });
+            
+            // Dark mode toggle
+            themeToggle.addEventListener('click', toggleDarkMode);
+            
+            // Close modals on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && state.activeModal) {
+                    closeModals();
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', debounce(() => {
+                // You could add responsive adjustments here if needed
+            }, 200));
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <style>
+        /* Screen reader only utility class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Focus styles for accessibility */
+        button:focus-visible, a:focus-visible, [tabindex="0"]:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        /* Print styles */
+        @media print {
+            .navbar, .hero, .footer, .theme-toggle, .info-btn, .btn-outline {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .booklet-card {
+                break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
